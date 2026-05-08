@@ -76,43 +76,8 @@ This project uses Groq as the LLM provider. Groq offers a free tier with fast in
 
 ## Architecture
 
+![rag architecture](spring_ai_rag_architecture_v2.svg)
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        STARTUP (once)                           │
-│                                                                 │
-│  PDF / TXT  ──►  PagePdfDocumentReader  ──►  TokenTextSplitter  │
-│                                                  │              │
-│                                                  ▼              │
-│                                          EmbeddingModel         │
-│                                    (text-embedding-3-small)     │
-│                                                  │              │
-│                                                  ▼              │
-│                                         SimpleVectorStore       │
-│                                         (in-memory, JVM)        │
-└─────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────┐
-│                   QUERY (per request)                           │
-│                                                                 │
-│  POST /ask  ──►  ChatController  ──►  RagService               │
-│  {"question": "..."}                      │                     │
-│                                           ▼                     │
-│                               QuestionAnswerAdvisor             │
-│                                 (intercepts the prompt)         │
-│                                           │                     │
-│                         ┌─────────────────┘                     │
-│                         ▼                                       │
-│                  Embed the question                             │
-│                  Search vector store                            │
-│                  Retrieve top-k chunks                          │
-│                  Inject as context                              │
-│                         │                                       │
-│                         ▼                                       │
-│              Groq LLM (llama-3.1-8b-instant)                   │
-│                         │                                       │
-│                         ▼                                       │
-│              {"answer": "..."}  ──►  HTTP Response              │
-└─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
