@@ -1,0 +1,51 @@
+Java and Artificial Intelligence: A Production Perspective
+
+Introduction
+------------
+Java has long been the backbone of enterprise software systems. In recent years, it has also emerged as a serious platform for deploying and integrating artificial intelligence. While Python dominates model training and experimentation, Java is increasingly the language of choice when AI meets production.
+
+Spring AI
+---------
+Spring AI is an application framework from the Spring team that brings AI capabilities to Java applications using familiar Spring patterns. It provides abstractions over large language models (LLMs), vector stores, and embedding models, allowing developers to swap providers without rewriting business logic.
+
+Key features of Spring AI include:
+- A unified ChatClient API that works with OpenAI, Azure OpenAI, Anthropic, Ollama, and others
+- Built-in support for Retrieval-Augmented Generation (RAG) via advisors
+- Integration with vector databases including pgvector, Chroma, Weaviate, and Pinecone
+- Document readers for PDF, plain text, and JSON sources
+- TokenTextSplitter for chunking large documents before embedding
+
+Retrieval-Augmented Generation (RAG)
+-------------------------------------
+RAG is a technique that grounds LLM responses in a specific knowledge base, preventing hallucination. The process works as follows:
+1. Documents are split into chunks and converted to vector embeddings
+2. Embeddings are stored in a vector database
+3. When a user asks a question, it is also embedded
+4. The most semantically similar chunks are retrieved
+5. Those chunks are injected into the LLM prompt as context
+6. The LLM answers using the provided context rather than relying on general training data
+
+Spring AI simplifies this entire pipeline with the QuestionAnswerAdvisor, which handles steps 3 through 5 automatically.
+
+LangChain4j
+-----------
+LangChain4j is another Java framework inspired by Python's LangChain. It offers a fluent API for building LLM chains, tools, and agents. It supports function calling, memory management, and streaming responses, and integrates with many of the same LLM providers as Spring AI.
+
+Deep Java Library (DJL)
+------------------------
+DJL, developed by AWS, allows Java developers to run pre-trained deep learning models directly on the JVM. It supports PyTorch, TensorFlow, and MXNet backends and is often used to run Python-trained models in Java microservices without a Python runtime dependency.
+
+Why Java for AI in Production?
+-------------------------------
+Enterprises are adopting Java for AI workloads for several reasons:
+- Maturity: Java has decades of tooling for monitoring, deployment, and security
+- Performance: The JVM's JIT compilation and garbage collection tuning are well understood at scale
+- Integration: AI can be added directly into existing Spring Boot microservices
+- Talent: Java developers outnumber Python engineers in many enterprise organisations
+- Type safety: Strong typing catches errors at compile time, reducing runtime surprises in production
+
+The combination of Spring AI for LLM integration, vector stores for knowledge retrieval, and Spring Boot for deployment makes Java a compelling end-to-end platform for production AI systems.
+
+Conclusion
+----------
+Java is no longer just consuming AI services through REST calls. With frameworks like Spring AI and LangChain4j, Java applications can embed sophisticated AI behaviour — including RAG pipelines, chatbots, and autonomous agents — using the same patterns, tooling, and deployment infrastructure that teams already know. This is exactly why Java is becoming the bridge between AI models and real-world enterprise systems.
