@@ -22,7 +22,7 @@ This is the technology behind enterprise chatbots, document Q&A systems, knowled
 
 On startup, Spring AI reads the document, splits it into chunks, generates embeddings, and loads everything into the in-memory vector store. The application is ready to accept queries only after ingestion completes.
 
-![Startup and ingestion log](screenshot_startup_log.png)
+![Startup and ingestion log — PDF processing, chunking, embedding](screenshot_startup_log.png)
 
 ---
 
@@ -36,7 +36,7 @@ curl -X POST http://localhost:8080/ask \
   -d '{"question": "What is Rajesh Rajan total years of experience and his strongest technical skills?"}'
 ```
 
-![curl question about Rajesh Rajan](screenshot_curl_rajesh.png)
+![curl query — asking about Rajesh Rajan experience and skills](question_rajesh_rajan.png)
 
 ---
 
@@ -44,7 +44,7 @@ curl -X POST http://localhost:8080/ask \
 
 The model answers directly from the ingested document — not from its general training data:
 
-![IntelliJ answer output — Rajesh Rajan skills](screenshot_intellij_answer.png)
+![IntelliJ Run output — full answer with all 15 skill categories](output_intellij_log_1.png)
 
 The response lists all 15 skill categories exactly as they appear in the source document, with no fabrication.
 
@@ -60,7 +60,7 @@ curl -X POST http://localhost:8080/ask \
   -d '{"question": "What is Spring AI and what are its key features?"}'
 ```
 
-![curl question about Spring AI](screenshot_curl_springai.png)
+![curl question about Spring AI](question_sample_txt.png)
 
 The model answers with Spring AI's exact feature list as described in the document — unified ChatClient, RAG support, vector database integrations — retrieved and grounded, not imagined.
 
@@ -70,7 +70,7 @@ The model answers with Spring AI's exact feature list as described in the docume
 
 This project uses Groq as the LLM provider. Groq offers a free tier with fast inference. Create your API key at [console.groq.com/keys](https://console.groq.com/keys):
 
-![Groq API key creation](screenshot_groq_apikey.png)
+![Groq API key management — console.groq.com/keys](create_api_key.png)
 
 ---
 
@@ -331,7 +331,7 @@ curl -X POST http://localhost:8080/ask \
   -d '{"question": "What is Spring AI and what are its key features?"}'
 ```
 
-![Spring AI query response](screenshot_curl_springai.png)
+![curl response — Spring AI features answered from sample.txt](question_sample_txt.png)
 
 ---
 
@@ -348,7 +348,7 @@ curl -X POST http://localhost:8080/ask \
   -d '{"question": "What is Rajesh Rajan total years of experience and his strongest technical skills?"}'
 ```
 
-![CV query — IntelliJ output](screenshot_intellij_answer.png)
+![IntelliJ Run output — full answer with all 15 skill categories](output_intellij_log_1.png)
 
 The model returns all 15 skill categories exactly as they appear in the CV — retrieved from the document, not invented from training data.
 
